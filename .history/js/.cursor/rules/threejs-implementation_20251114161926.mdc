@@ -1,0 +1,7 @@
+---
+description: Three.js 3D 씬 구현 가이드 및 성능 최적화
+globs:
+  - "**/three-scene.js"
+  - "**/js/three*.js"
+alwaysApply: true
+---
