@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aicoffeechat - AI Creator Studio</title>
+    
+    <!-- 1. Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. Three.js (for 3D models) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- 3. Lenis (for smooth scrolling) -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis"></script>
+    
+    <!-- 4. Custom Tailwind Config & Fonts -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'coffee-bg': '#fdfbf7', // A very light, warm beige
+              'coffee-text': '#3a2e28', // Dark, rich brown
+              'coffee-accent-light': '#d4c5b7', // Muted, light brown
+              'coffee-accent-dark': '#a38a74', // Deeper accent
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            animation: {
+              'slow-spin': 'spin 20s linear infinite',
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- 5. Custom CSS Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased">
+
+    <!-- 3D Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-coffee-text tracking-tighter">
+                aicoffeechat
+            </a>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#work" class="text-coffee-text hover:text-coffee-accent-dark transition-colors duration-300">Work</a></li>
+                <li><a href="#about" class="text-coffee-text hover:text-coffee-accent-dark transition-colors duration-300">About</a></li>
+                <li><a href="#contact" class="text-coffee-text hover:text-coffee-accent-dark transition-colors duration-300">Contact</a></li>
+            </ul>
+            <button class="md:hidden text-coffee-text">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen min-h-[700px] flex items-center justify-center text-center px-6 relative">
+            <div class="relative z-10">
+                <h1 class="text-6xl md:text-9xl font-bold text-coffee-text tracking-tighter leading-tight fade-in">
+                    Digital Dreams,
+                    <br>
+                    <span class="text-coffee-accent-dark">AI Realities.</span>
+                </h1>
+                <p class="mt-6 text-xl md:text-2xl text-coffee-text max-w-2xl mx-auto fade-in" style="transition-delay: 0.2s;">
+                    We are <span class="font-semibold">aicoffeechat</span>, a creative studio crafting stunning digital experiences where artificial intelligence meets human artistry.
+                </p>
+            </div>
+        </section>
+
+        <!-- Work Section (with Parallax) -->
+        <section id="work" class="py-24 md:py-32 bg-coffee-bg">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-5xl font-bold text-coffee-text tracking-tighter mb-16 fade-in">
+                    Selected Work
+                </h2>
+                
+                <!-- Project Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    
+                    <!-- Parallax Container 1 -->
+                    <div class="relative h-[60vh] overflow-hidden rounded-2xl fade-in">
+                        <img 
+                            src="https://placehold.co/800x1000/a38a74/fdfbf7?text=Project+Echo" 
+                            alt="Project Echo"
+                            class="absolute top-[-20%] left-0 w-full h-[140%] object-cover parallax-bg"
+                        >
+                        <div class="absolute bottom-6 left-6 z-10">
+                            <h3 class="text-3xl font-bold text-white">Project Echo</h3>
+                            <p class="text-lg text-gray-200">Generative Audio Landscapes</p>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    </div>
+                    
+                    <!-- Parallax Container 2 -->
+                    <div class="relative h-[60vh] overflow-hidden rounded-2xl fade-in md:mt-24">
+                         <img 
+                            src="https://placehold.co/800x1000/3a2e28/fdfbf7?text=Project+Nova" 
+                            alt="Project Nova"
+                            class="absolute top-[-20%] left-0 w-full h-[140%] object-cover parallax-bg"
+                        >
+                        <div class="absolute bottom-6 left-6 z-10">
+                            <h3 class="text-3xl font-bold text-white">Project Nova</h3>
+                            <p class="text-lg text-gray-200">AI-Driven Brand Identity</p>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    </div>
+                    
+                     <!-- Project 3 (Static) -->
+                    <div class="relative h-[60vh] overflow-hidden rounded-2xl fade-in">
+                         <img 
+                            src="https://placehold.co/800x1000/d4c5b7/3a2e28?text=Project+Flow" 
+                            alt="Project Flow"
+                            class="absolute top-0 left-0 w-full h-full object-cover"
+                        >
+                        <div class="absolute bottom-6 left-6 z-10">
+                            <h3 class="text-3xl font-bold text-coffee-text">Project Flow</h3>
+                            <p class="text-lg text-coffee-text/80">Interactive Data Visualization</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 (Static) -->
+                    <div class="relative h-[60vh] overflow-hidden rounded-2xl fade-in md:mt-24">
+                         <img 
+                            src="https://placehold.co/800x1000/8c7a6b/fdfbf7?text=Project+Aura" 
+                            alt="Project Aura"
+                            class="absolute top-0 left-0 w-full h-full object-cover"
+                        >
+                        <div class="absolute bottom-6 left-6 z-10">
+                            <h3 class="text-3xl font-bold text-white">Project Aura</h3>
+                            <p class="text-lg text-gray-200">Real-time Style Transfer</p>
+                        </div>
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="py-24 md:py-40">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="fade-in">
+                    <span class="text-lg font-semibold text-coffee-accent-dark">Our Philosophy</span>
+                    <h2 class="mt-4 text-5xl font-bold text-coffee-text tracking-tighter leading-tight">
+                        We believe in AI as a collaborator, not just a tool.
+                    </h2>
+                </div>
+                <div class="fade-in" style="transition-delay: 0.2s;">
+                    <p class="text-xl text-coffee-text/90 leading-relaxed">
+                        At aicoffeechat, our process is a dialogue between human intuition and machine intelligence. We blend cutting-edge deep learning models with seasoned design principles to create work that isn't just smart—it's soulful.
+                    </p>
+                    <p class="mt-6 text-xl text-coffee-text/90 leading-relaxed">
+                        From generative art and data-driven narratives to intelligent branding and interactive installations, we push the boundaries of what's possible when code and creativity collide.
+                    </p>
+                    <a href="#contact" class="inline-block mt-8 px-8 py-4 bg-coffee-text text-coffee-bg font-semibold rounded-full hover:bg-coffee-accent-dark hover:text-white transition-all duration-300 transform hover:scale-105">
+                        Let's Talk
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 md:py-40 bg-coffee-accent-light/30">
+            <div class="max-w-3xl mx-auto px-6 text-center">
+                <h2 class="text-6xl md:text-8xl font-bold text-coffee-text tracking-tighter leading-tight fade-in">
+                    Have an idea?
+                </h2>
+                <p class="mt-6 text-xl md:text-2xl text-coffee-text/90 max-w-xl mx-auto fade-in" style="transition-delay: 0.1s;">
+                    Let's grab a virtual coffee and chat about how we can bring it to life. We're always excited by a new challenge.
+                </p>
+                <a href="mailto:hello@aicoffeechat.com" class="mt-10 text-3xl md:text-5xl font-medium text-coffee-accent-dark hover:text-coffee-text tracking-tighter transition-colors duration-300 inline-block fade-in" style="transition-delay: 0.2s;">
+                    hello@aicoffeechat.com
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="text-coffee-text/70">&copy; 2025 aicoffeechat. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="text-coffee-text/70 hover:text-coffee-text">Twitter</a>
+                <a href="#" class="text-coffee-text/70 hover:text-coffee-text">LinkedIn</a>
+                <a href="#" class="text-coffee-text/70 hover:text-coffee-text">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Main JavaScript Logic -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
