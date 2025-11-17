@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최하준 | 백엔드 개발자 포트폴리오</title>
+    
+    <!-- 1. Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. Three.js (for 3D models) -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+      }
+    }
+    </script>
+    
+    <!-- 3. Lenis (for smooth scrolling) -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    
+    <!-- 4. Custom Tailwind Config & Fonts -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'coffee-bg': '#fdfbf7', // A very light, warm beige
+              'coffee-text': '#3a2e28', // Dark, rich brown
+              'coffee-accent-light': '#d4c5b7', // Muted, light brown
+              'coffee-accent-dark': '#a38a74', // Deeper accent
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+            },
+          }
+        }
+      }
+    </script>
+    
+    <!-- 5. Custom CSS Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased bg-coffee-bg text-coffee-text">
+
+    <!-- 3D Background Canvas -->
+    <canvas id="bg-canvas" class="fixed inset-0 w-full h-full -z-10"></canvas>
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-bold text-coffee-text tracking-tighter">
+                최하준
+            </a>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#introduce" class="text-coffee-text hover:text-coffee-accent-dark transition-colors duration-300">Introduce</a></li>
+                <li><a href="#skills" class="text-coffee-text hover:text-coffee-accent-dark transition-colors duration-300">Skills</a></li>
+                <li><a href="#career" class="text-coffee-text hover:text-coffee-accent-dark transition-colors duration-300">Career</a></li>
+                <li><a href="#projects" class="text-coffee-text hover:text-coffee-accent-dark transition-colors duration-300">Projects</a></li>
+                <li><a href="#other-experience" class="text-coffee-text hover:text-coffee-accent-dark transition-colors duration-300">Other Experience</a></li>
+                <li><a href="#education" class="text-coffee-text hover:text-coffee-accent-dark transition-colors duration-300">Education</a></li>
+                <li><a href="#contact" class="text-coffee-text hover:text-coffee-accent-dark transition-colors duration-300">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen min-h-[700px] flex items-center justify-center text-center px-6 relative">
+            <div class="relative z-10 fade-in">
+                <h1 class="text-6xl md:text-8xl font-bold text-coffee-text tracking-tighter leading-tight">
+                    최하준
+                </h1>
+                <h2 class="text-3xl md:text-5xl font-medium text-coffee-accent-dark tracking-tighter mt-2">
+                    백엔드 개발자
+                </h2>
+                <p class="mt-6 text-xl md:text-2xl text-coffee-text max-w-2xl mx-auto">
+                    안녕하세요, “문제를 발견하면 해결책을 만드는” 개발자 최하준입니다.
+                </p>
+                <div class="mt-10 flex justify-center space-x-4">
+                    <a href="https://github.com/blackjune67" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-3 bg-coffee-text text-coffee-bg font-semibold rounded-full hover:bg-coffee-accent-dark hover:text-white transition-all duration-300 transform hover:scale-105">
+                        GitHub
+                    </a>
+                    <a href="https://jjunii486.tistory.com/" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-3 bg-white/70 text-coffee-text font-semibold rounded-full border border-coffee-accent-light/50 hover:bg-white transition-all duration-300 transform hover:scale-105">
+                        Blog
+                    </a>
+                    <a href="https://www.notion.so/153f3998ccad80738ec7de54ecf8c6b3?pvs=21" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-3 bg-white/70 text-coffee-text font-semibold rounded-full border border-coffee-accent-light/50 hover:bg-white transition-all duration-300 transform hover:scale-105">
+                        Resume
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduce Section -->
+        <section id="introduce" class="py-24 md:py-32 bg-coffee-accent-light/30">
+            <div class="max-w-5xl mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold text-coffee-text tracking-tighter mb-12 fade-in">Introduce</h2>
+                <p class="mt-6 text-xl md:text-2xl text-coffee-text max-w-3xl mx-auto leading-relaxed fade-in">
+                    안녕하세요, “문제를 발견하면 해결책을 만드는” 개발자 최하준입니다.
+                </p>
+                <ul class="mt-8 text-lg md:text-xl text-coffee-text max-w-3xl mx-auto list-disc list-inside text-left space-y-2 fade-in">
+                    <li>로봇 영상 처리 API 성능 1.5배 개선으로 다수 고객사 POC 성공</li>
+                    <li>티켓 스케줄 조회 성능 67% 단축(3초→1초), 일 3만건 처리 최적화</li>
+                    <li>SpringBoot WebFlux 도입으로 동시 결제 처리량 150% 증가(50→200 TPS)</li>
+                    <li>4년간 티켓팅, AI/로봇, 블록체인 도메인에서 풀스택 개발 경험</li>
+                </ul>
+                <p class="mt-8 text-xl md:text-2xl font-semibold text-coffee-accent-dark max-w-3xl mx-auto fade-in">
+                    🚀 현재 대용량 동시 접속 티켓팅 시스템과 결제 최적화에 집중하고 있습니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 md:py-32">
+            <div class="max-w-5xl mx-auto px-6">
+                <h2 class="text-center text-4xl font-bold text-coffee-text tracking-tighter mb-16 fade-in">Skills</h2>
+                <div class="fade-in">
+                    <!-- Backend -->
+                    <div class="mb-10">
+                        <h3 class="text-2xl font-semibold text-coffee-text mb-4">Backend</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-pill">Java</span>
+                            <span class="skill-pill">Kotlin</span>
+                            <span class="skill-pill">SpringBoot 2/3</span>
+                            <span class="skill-pill">WebFlux</span>
+                            <span class="skill-pill">JPA</span>
+                            <span class="skill-pill">MySQL</span>
+                            <span class="skill-pill">Redis</span>
+                        </div>
+                    </div>
+                    <!-- Cloud & DevOps -->
+                    <div class="mb-10">
+                        <h3 class="text-2xl font-semibold text-coffee-text mb-4">Cloud & DevOps</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-pill">AWS (S3, EC2, Lambda, API Gateway)</span>
+                            <span class="skill-pill">Docker</span>
+                            <span class="skill-pill">Jenkins</span>
+                            <span class="skill-pill">GitHub Actions</span>
+                        </div>
+                    </div>
+                    <!-- Frontend -->
+                    <div class="mb-10">
+                        <h3 class="text-2xl font-semibold text-coffee-text mb-4">Frontend</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-pill">JS</span>
+                            <span class="skill-pill">JQuery</span>
+                            <span class="skill-pill">React</span>
+                            <span class="skill-pill">Vue.js</span>
+                            <span class="skill-pill">Next.js</span>
+                        </div>
+                    </div>
+                    <!-- AI/ML -->
+                    <div class="mb-10">
+                        <h3 class="text-2xl font-semibold text-coffee-text mb-4">AI/ML</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-pill">Python</span>
+                            <span class="skill-pill">FastAPI</span>
+                            <span class="skill-pill">TensorFlow</span>
+                            <span class="skill-pill">AWS Rekognition</span>
+                        </div>
+                    </div>
+                    <!-- Payment & Auth -->
+                    <div class="mb-10">
+                        <h3 class="text-2xl font-semibold text-coffee-text mb-4">결제/인증</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-pill">JWT</span>
+                            <span class="skill-pill">OAuth</span>
+                            <span class="skill-pill">KICC EasyPay</span>
+                            <span class="skill-pill">FitCollabo</span>
+                        </div>
+                    </div>
+                    <!-- VCS -->
+                    <div class="mb-10">
+                        <h3 class="text-2xl font-semibold text-coffee-text mb-4">VCS</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-pill">GitHub</span>
+                            <span class="skill-pill">BitBucket</span>
+                            <span class="skill-pill">Gitlab</span>
+                            <span class="skill-pill">Jira Confluence</span>
+                        </div>
+                    </div>
+                    <!-- ETC/Tools -->
+                    <div>
+                        <h3 class="text-2xl font-semibold text-coffee-text mb-4">ETC/Tools</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-pill">Slack</span>
+                            <span class="skill-pill">Notion</span>
+                            <span class="skill-pill">Obsidian</span>
+                            <span class="skill-pill">Figma</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Career Section -->
+        <section id="career" class="py-24 md:py-32 bg-coffee-accent-light/30">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-center text-5xl font-bold text-coffee-text tracking-tighter mb-20 fade-in">
+                    Career & Work Experience
+                </h2>
+                <div class="relative pl-8 md:pl-10 border-l-2 border-coffee-accent-dark">
+                    <!-- SmarTix -->
+                    <div class="timeline-item fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text">스마틱스 (서비스개발2팀)</h3>
+                        <p class="text-lg text-coffee-accent-dark mb-4">FullStack Engineer (2025.02 ~ 현재)</p>
+                        <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-2 mb-6">
+                            <li>**놀유니버스 & 휘닉스파크, 웰리힐리 외부 API 연동**</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>API 명세서 기반 휘닉스파크, 웰리힐리 외부 API 연동 개발 100% 기여</li>
+                                <li>레거시 HttpClient를 RestTemplate으로 리팩토링하여 보일러플레이트 코드 60% 감소 및 코드 가독성 향상</li>
+                                <li>HttpClient 사용 및 Given-When-Then 패턴 기반 통합 테스트 코드 작성으로 API 연동 안정성 확보</li>
+                                <li>웰리힐리 API를 활용한 요금 조회 시 API 응답 시간 30초 → 6초로 개선 (Intellij 성능 측정 기준)</li>
+                            </ul>
+                            <li>**여행업협회, 여행샵 프로젝트 추가 기능 개발**</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>판매 상품의 패키지 등록, 수정, 스케줄 등록, 수정, 일괄수정 등 운영 전반의 기능 및 고객 전용 페이지 기능 추가 및 유지보수</li>
+                                <li>복잡도 증가로 인한 티켓 스케줄 목록 쿼리 인덱스 변경 후 데이터 속도 1.5배 개선</li>
+                                <li>티켓 스케줄 조회 API 성능 최적화를 통해 응답시간 67% 단축 (3초 → 1초), 일 평균 3만건 조회 처리 시 서버 리소스 사용량 40% 절감</li>
+                                <li>Safari 브라우저에서 예약자 정보가 인코딩되지 않는 현상 개선 (쿠키 셋팅 시 인코딩 로직 추가)</li>
+                                <li>개발 및 운영 Jenkins 배포 환경 설정 (Freestyle Project 설정 후 gitlab의 브런치명으로 배포되도록 환경 구성)</li>
+                            </ul>
+                            <li>**신규서비스 메이크티켓 3.0 개발**</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>SpringBoot 2.x → 3.0, Gradle DSL 방식 전환 및 jQuery 버전 업그레이드로 개발 환경 표준화</li>
+                                <li>개발 환경 현대화로 향후 유지보수, 개발 속도 40% 향상 기대</li>
+                                <li>MapStruct 도입한 VO/DTO 분리 아키텍처로 계층간 데이터 전송 최적화</li>
+                                <li>API 응답/에러 코드 표준화 및 통합 예외 처리로 유지보수성 30% 개선</li>
+                                <li>Bean Lazy Initialization 사용함으로 프로젝트 최적화 후 빌드 시간 단축 (17.396초 → 2.652초로 단축. 개선 60%)</li>
+                                <li>레거시 상품 복사 기능을 리팩토링 함으로 상품 등록 시간 50% 단축</li>
+                                <li>장소 관리 시스템 구축 및 네이버/카카오 예약 채널 연동</li>
+                                <li>기존 DB 불필요한 인덱스, 컬럼 제거를 통한 데이터베이스 최적화</li>
+                                <li>자바단 코드 품질 개선으로 버그 발생률 감소 및 개발자 경험 향상</li>
+                                <li>Tiles에서 SiteMesh 프레임워크로 관리자 페이지 마이그레이션 후 JSP 코드 이관</li>
+                                <li>약 3천5백줄 가량의 js파일을 기능별로 모듈화 작업 진행 후 유지보수성 개선</li>
+                            </ul>
+                            <li>**메이크티켓 2.0 시스템, 핏콜라보 간편결제 연동 개발**</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>핏콜라보 API 연동 시 동기 처리로 인한 타임아웃 이슈 해결을 위한 SpringBoot WebFlux의 WebClient 이용해 비동기 처리 구현, 동시 결제 요청 처리량 150% 증가 (50 → 200 TPS)</li>
+                                <li>JWT 기반 인증 처리 후 인증 토큰을 이용한 비로그인 결제방식 적용</li>
+                                <li>기존의 복잡한 JS 방식에서 유지보수성을 고려한 모듈형 아키텍처 설계 구조 적용 후 유지보수 관리 용이성 향상</li>
+                            </ul>
+                        </ul>
+                    </div>
+
+                    <!-- 블루바이저 시스템즈 -->
+                    <div class="timeline-item fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text">블루바이저 시스템즈 (로봇개발팀)</h3>
+                        <p class="text-lg text-coffee-accent-dark mb-4">Backend Engineer (2024.03 ~ 2025.02)</p>
+                        <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-2 mb-6">
+                            <li>**오디오 분석 시스템 개발** (2024.12 ~ 2025.01)</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>기술 스택: Java, SpringBoot, AWS SDK, S3, EC2, AWS Transcribe, AWS Translate, AWS Polly</li>
+                                <li>텍스트 번역, TTS, STT, Real Time STT, Real Time TTS 등을 통한 음성 분석 및 화자 분석 시스템 개발</li>
+                                <li>Spring Security 활용한 인증 절차 도입</li>
+                                <li>S3의 Presigned URL을 도입해 대용량 파일 업로드 시 서버 부하 개선 및 보안 강화</li>
+                            </ul>
+                            <li>**이미지 분석 시스템 구축** (2024.12 ~ 2024.01)</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>기술 스택: AWS API Gateway, Lambda, Python, Rekognition, S3, Swagger UI</li>
+                                <li>SpringBoot 기반 미들웨어를 제거하고 서버리스 구조로 전환, 데이터 응답 시간을 기존 50초~1분에서 20초로 단축</li>
+                                <li>API Gateway를 이용해 Serverless 시스템 개발</li>
+                                <li>S3의 정적 웹 호스팅을 이용해 Swagger UI, API 테스트 가능하도록 구축</li>
+                            </ul>
+                            <li>**실시간 영상 분석 시스템 구축** (2024.10 ~ 2024.11)</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>기술 스택: Python, FastAPI, Tensorflow, Uvicorn, Deep Face, MTCNN, YOLO, WebSocket, EC2, MySQL, Grafana, Loki, Prometheus, Docker, Web Socket</li>
+                                <li>기존 Deep Face 모델의 동양인 정확도 문제를 대한민국 서울 AI 허브의 동양인 모델 (H5) 적용 후 성별/나이 추정 정확성 90% 개선</li>
+                                <li>물리적 메모리를 50% 제한을 걸어 AWS EC2 Instance CPU 부하율을 20% 개선</li>
+                                <li>Deep Face (얼굴 인식 프레임워크) 도입 후 Docker 이미지를 3.7GB → 1.7GB로 경량화 성공</li>
+                                <li>영상분석 백엔드 시스템 Docker 컨테이너화로 인한 개발환경 일관성 확보</li>
+                            </ul>
+                            <li>**영상, 이미지 분석 시스템 구축** (2024.08 ~ 2024.09)</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>기술 스택: Java, SpringBoot, AWS Rekognition, SNS, SQS, Lambda, Node.js, CloudWatch, EC2, MySQL, GitActions, AWS CodeDeploy, Docker, Docker Compose, Web Socket</li>
+                                <li>Rekognition 분석 응답 데이터를 DB 조회 대신 캐시(Spring Cache)를 통해 데이터를 바로 전달하도록 로직 개선, 응답 시간을 50% 단축 (1분 → 30초)</li>
+                                <li>메시지 큐 방식과 서버리스 도입함으로 데이터 안정성 확보 및 실시간 분석 후 클라이언트 전달 타임아웃 발생 확률 100% 감소</li>
+                                <li>AWS Rekognition을 이용함으로 인해 YOLO 모델을 사용하는 것 보다 서버 부하 100% 감소 및 영상, 이미지 분석의 정확도 80% 향상 달성</li>
+                                <li>AWS CloudWatch를 이용한 로그 분석 시스템 구축 (SNS, SQS, Lambda 로그 포함)</li>
+                                <li>Git Actions 자동 배포 환경 구현</li>
+                            </ul>
+                            <li>**위험 분석 시스템 개발** (2024.08 ~ 2024.08)</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>기술 스택: GCP, Javascript, WebRTC, node.js, GCP Intelligence, Vue2.0</li>
+                                <li>GCP의 Cloud Video Intelligence API을 활용하여 녹화된 영상을 웹 페이지에서 유해 물건 인식, 사람의 표정 감지, 위협 행동 탐지 등 분석 시스템 개발</li>
+                            </ul>
+                        </ul>
+                    </div>
+
+                    <!-- 브릭소프트 -->
+                    <div class="timeline-item fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text">브릭소프트 (프리랜서)</h3>
+                        <p class="text-lg text-coffee-accent-dark mb-4">Front Engineer (2022.10 ~ 2023.12)</p>
+                        <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-2 mb-6">
+                            <li>**ATOMICA 상품 주문 및 결제 시스템 개발** (2022.10 ~ 2022.11)</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>기술 스택: React, Recoil, Next.js</li>
+                                <li>일본 현지 ATOMICA 상품 주문 시스템 개발을 주도하며 안정적이고 사용자 친화적인 솔루션을 구축</li>
+                                <li>상품 주문 웹 페이지 개발 및 일본 현지 카드 결제 시스템 연동</li>
+                            </ul>
+                        </ul>
+                    </div>
+
+                    <!-- 코핀홀딩스 -->
+                    <div class="timeline-item fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text">코핀홀딩스 (부설연구소)</h3>
+                        <p class="text-lg text-coffee-accent-dark mb-4">Mobile & Front Engineer (2021.11 ~ 2022.08)</p>
+                        <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-2 mb-6">
+                            <li>**아스타 월렛** (2021.11 ~ 2022.08)</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>기술 스택: React Native, MobX, EXPO, Git</li>
+                                <li>개인정보 보호 관리 체계 ISMS 인증 획득을 위한 절차 추가 및 인증 방법 개선</li>
+                                <li>자사 코인 ASTA, MYCE, BPM 등 암호화폐 입출금 시 정수 기반 계산에서 부동소수점 방식으로 기능 개선 후 소수점 단위의 전체 금액 입출금이 가능해짐</li>
+                                <li>React Native SDK 39에서 43으로 마이그레이션 및 빌드 환경 개선 후 통합 테스트 진행 및 서비스 안정성을 강화</li>
+                            </ul>
+                            <li>**토탈 월렛** (2022.05 ~ 2022.07)</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>기술 스택: Dart, Flutter 2.0, Bloc, Git</li>
+                                <li>Flutter 2.0 기반으로 토탈월렛 지갑 서비스를 새롭게 설계 및 개발</li>
+                                <li>업비트, 빗썸, 코인원의 API를 이용해 실시간 차트 페이지 개발 (Tick 단위 기준으로 조회) 및 업비트 BCT 결제 시스템 연동</li>
+                            </ul>
+                            <li>**이더리움 기반의 코인 발행 시스템** (2021.11 ~ 2022.08)</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>기술 스택: javascript, node, express, Ethers.js</li>
+                                <li>ERC-20 Interface를 이용한 네트워킹 서비스 개발 (Ethers라이브러리를 이용한 트랜잭션 수수료 정보 조회 API 개발, 컨트렉트 이벤트 로그 조회 기능 개발)</li>
+                                <li>Ethers.js를 활용한 이더리움 네트워크 실시간 연동 및 트랜잭션 처리</li>
+                                <li>동적 가스비 계산 알고리즘 구현으로 네트워크 상황에 따른 최적 수수료 산정</li>
+                                <li>가스 사용량 예측 API 개발: 토큰 발행 전 예상 비용을 사전 계산하여 사용자에게 제공</li>
+                                <li>스마트 컨트랙트 이벤트 로그 조회 기능 개발</li>
+                                <li>토큰 발행 시 이중 지출 방지 로직 설계: 동일 요청에 대한 중복 트랜잭션 차단 및 상태 관리</li>
+                            </ul>
+                        </ul>
+                    </div>
+
+                    <!-- 스마틱스 (이전 경력) -->
+                    <div class="timeline-item fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text">스마틱스 (서비스개발팀)</h3>
+                        <p class="text-lg text-coffee-accent-dark mb-4">FullStack Engineer (2019.10 ~ 2021.05)</p>
+                        <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-2 mb-6">
+                            <li>**광주 국립 아시아문화전당 (ACC)** (2021.01 ~ 2021.05)</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>기술 스택: Java, SpringBoot, MySQL, JSP, Nginx</li>
+                                <li>시스템의 원본 소스 유실 및 기존 Oracle 기반 DB 성능 저하, 티켓 발권 시스템의 높은 오류률 문제 해결</li>
+                                <li>클라이언트 측 Jar 파일 디컴파일 분석, JSP 파라미터 유추를 통해 기능 확인</li>
+                                <li>데이터베이스를 Oracle에서 MySQL로 마이그레이션 및 불필요한 컬럼 삭제, 인덱스 추가로 조회 성능 개선</li>
+                                <li>Spring Boot 기반 API 개발을 통해 로그인, 예약조회, 예약발권, 잔여수량조회, 인증번호, 검표여부 유효성 체크, 현장판매 발권, 현장발권 취소, CTI 저장용 API, 키오스크별 관리 API 주요 기능 구현</li>
+                                <li>데이터 조회 및 발권 속도 35% 개선 (평균 응답 시간 1.5초 → 1초)</li>
+                                <li>예약 잔여 수량 조회 오류률을 10% 이하로 줄임</li>
+                            </ul>
+                            <li>**해운대 블루라인 SMART PARK (한화시스템)** (2020.10 ~ 2021.02)</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>기술 스택: Java, SpringBoot, MySQL, JSP, Nginx, Git</li>
+                                <li>관리자 페이지 및 파트너 페이지 개발, 고객 티켓 예약, 예매 페이지 개발</li>
+                                <li>티켓 예약 & 발권 키오스크 API 연동 개발 (로그인, 예약조회, 예약발권, 잔여수량조회, 예약취소, 발권취소, 카운터 기능)</li>
+                                <li>키오스크 로그인 시 토큰 갱신 문제 JWT AccessToken과 Refresh Token으로 개선</li>
+                                <li>정거장별 키오스크 관리자 교대 시 정산 시스템 개발</li>
+                                <li>예약/발권/취소 유지보수 및 운영 이슈 대응</li>
+                            </ul>
+                        </ul>
+                    </div>
+
+                    <!-- 머지홀딩스 -->
+                    <div class="timeline-item fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text">머지홀딩스 (개발팀, 인턴)</h3>
+                        <p class="text-lg text-coffee-accent-dark mb-4">Backend Engineer (2019.06 ~ 2019.08)</p>
+                        <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-2 mb-6">
+                            <li>**기술 도입 및 프로젝트 참여**</li>
+                            <ul class="list-circle list-inside ml-5 space-y-1">
+                                <li>첫 직장에서 Cordova와 TypeScript를 활용해 프로젝트를 진행하며 새로운 기술에 대한 학습과 적용을 경험.</li>
+                                <li>머지포인트 한끼식사 프로젝트의 기획에 참여하며 서비스의 초기 방향성과 기술 설계를 지원.</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section (기존 'Work Section'에서 변경) -->
+        <section id="projects" class="py-24 md:py-32 bg-coffee-accent-light/30">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-center text-5xl font-bold text-coffee-text tracking-tighter mb-16 fade-in">
+                    Projects
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                    <!-- Project Card 1: 티켓 스케줄 조회 최적화 -->
+                    <div class="project-card fade-in">
+                        <img src="https://placehold.co/600x400/a38a74/fdfbf7?text=Ticket+Optimization" alt="티켓 스케줄 조회 최적화" class="w-full h-48 object-cover rounded-t-xl">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-coffee-text">티켓 스케줄 조회 최적화</h3>
+                            <p class="mt-2 text-lg font-semibold text-coffee-accent-dark">응답시간 67% 단축 (3초 → 1초)</p>
+                            <p class="mt-3 text-coffee-text/80">일 3만 건의 티켓 스케줄 조회 API의 성능을 개선하여 사용자 경험을 향상시켰습니다. 복잡도 증가로 인한 쿼리 인덱스 변경 후 데이터 속도 1.5배 개선하였습니다.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="tech-pill">Java</span>
+                                <span class="tech-pill">SpringBoot</span>
+                                <span class="tech-pill">JPA</span>
+                                <span class="tech-pill">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 2: 동시 결제 처리량 개선 -->
+                    <div class="project-card fade-in" style="transition-delay: 0.1s;">
+                        <img src="https://placehold.co/600x400/3a2e28/fdfbf7?text=Payment+Concurrency" alt="동시 결제 처리량 개선" class="w-full h-48 object-cover rounded-t-xl">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-coffee-text">동시 결제 처리량 개선</h3>
+                            <p class="mt-2 text-lg font-semibold text-coffee-accent-dark">동시 처리량 150% 증가 (50 → 200 TPS)</p>
+                            <p class="mt-3 text-coffee-text/80">핏콜라보 API 연동 시 동기 처리로 인한 타임아웃 이슈 해결을 위해 SpringBoot WebFlux의 WebClient를 이용, 비동기 처리 구현하여 동시 결제 요청 처리량을 150% 증가시켰습니다.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="tech-pill">Java</span>
+                                <span class="tech-pill">SpringBoot</span>
+                                <span class="tech-pill">WebFlux</span>
+                                <span class="tech-pill">WebClient</span>
+                                <span class="tech-pill">JWT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3: 실시간 영상 분석 시스템 (POC) -->
+                    <div class="project-card fade-in" style="transition-delay: 0.2s;">
+                        <img src="https://placehold.co/600x400/d4c5b7/3a2e28?text=Realtime+Video+Analysis" alt="실시간 영상 분석 시스템" class="w-full h-48 object-cover rounded-t-xl">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-coffee-text">실시간 영상 분석 시스템 (POC)</h3>
+                            <p class="mt-2 text-lg font-semibold text-coffee-accent-dark">API 성능 1.5배 개선</p>
+                            <p class="mt-3 text-coffee-text/80">로봇 영상 처리 API의 성능을 개선하고, 대한민국 서울 AI 허브의 동양인 모델 (H5)을 적용하여 성별과 나이 추정 정확성을 90% 개선하며 다수 고객사의 POC를 성공적으로 이끌었습니다.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="tech-pill">Python</span>
+                                <span class="tech-pill">FastAPI</span>
+                                <span class="tech-pill">TensorFlow</span>
+                                <span class="tech-pill">DeepFace</span>
+                                <span class="tech-pill">YOLO</span>
+                                <span class="tech-pill">Docker</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 4: AWS 서버리스 영상 분석 -->
+                    <div class="project-card fade-in" style="transition-delay: 0.3s;">
+                        <img src="https://placehold.co/600x400/8c7a6b/fdfbf7?text=AWS+Serverless+Analysis" alt="AWS 서버리스 분석" class="w-full h-48 object-cover rounded-t-xl">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-coffee-text">AWS 서버리스 영상 분석</h3>
+                            <p class="mt-2 text-lg font-semibold text-coffee-accent-dark">응답 시간 50% 단축 (1분 → 30초)</p>
+                            <p class="mt-3 text-coffee-text/80">AWS Rekognition, SQS, Lambda, SNS를 활용하여 이벤트 기반의 확장 가능한 분석 시스템을 설계했습니다. Spring Cache를 활용하여 DB 조회 대신 캐시를 통해 데이터 전달 로직을 개선하여 응답 시간을 50% 단축했습니다.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="tech-pill">AWS Lambda</span>
+                                <span class="tech-pill">Rekognition</span>
+                                <span class="tech-pill">SQS</span>
+                                <span class="tech-pill">SNS</span>
+                                <span class="tech-pill">Spring Cache</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Other Experience Section -->
+        <section id="other-experience" class="py-24 md:py-32">
+            <div class="max-w-5xl mx-auto px-6">
+                <h2 class="text-center text-4xl font-bold text-coffee-text tracking-tighter mb-16 fade-in">Other Experience</h2>
+                <div class="space-y-12">
+                    <!-- AI Proficiency -->
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text mb-4">AI Proficiency</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white/50 p-6 rounded-lg shadow-sm">
+                                <h4 class="text-xl font-bold text-coffee-text mb-2">워크플로우 자동화</h4>
+                                <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-1">
+                                    <li>n8n + LLM 자동화 시스템 구축</li>
+                                    <li>Docker n8n image를 통해 로컬 환경 구축 → 사내 DB 연결 → 사내 DB의 테이블, 컬럼 메타데이터 추출 → 자연어 입력 LLM 도출</li>
+                                    <li>외부 API 문서 (엑셀)을 MD문서로 변경 후 Intellij Http Client API 자동 테스트</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/50 p-6 rounded-lg shadow-sm">
+                                <h4 class="text-xl font-bold text-coffee-text mb-2">코드 품질 개선</h4>
+                                <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-1">
+                                    <li>Claude CLI + Gemini CLI 활용</li>
+                                    <li>신규 프로젝트에 claude.md를 이용한 프로젝트 환경셋팅, Super Claude 설치 후 CLI 환경 구축</li>
+                                    <li>레거시 프로젝트에 claude.md 적용하여 개발 규칙, 파일 구조, 코드 품질 개선, 사용 금지 문법 정의</li>
+                                    <li>claude 토큰 부족 현상을 위한 claude mcp Gemini CLI 추가 설정</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/50 p-6 rounded-lg shadow-sm">
+                                <h4 class="text-xl font-bold text-coffee-text mb-2">MCP Server Agent</h4>
+                                <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-1">
+                                    <li>Smithery에서 Agent 쇼핑 후 시도 (mem0-memory 에이전트 사용 후 단점 파악)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Side Project -->
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text mb-4">Side Project</h3>
+                        <div class="bg-white/50 p-6 rounded-lg shadow-sm">
+                            <h4 class="text-xl font-bold text-coffee-text mb-2">TEAM Frost Forge</h4>
+                            <p class="text-coffee-text/90 leading-relaxed mb-2">현역 기획 2명, 개발 2명을 영입해 팀을 만들어 영리 목적의 요리 관련 HR 비즈니스 서비스 팀 구성</p>
+                            <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-1">
+                                <li>기술 스택: Kotlin, SpringBoot, MariaDB, React, Next.js</li>
+                                <li>팀 리더이며 백엔드, 프론트 개발자로 현재 프로젝트 진행</li>
+                                <li>디스코드 팀 운영 채널 개설 후 매 주 일요일 마다 온라인 회의 진행</li>
+                                <li>불필요한 내용을 줄이기 위한 데일리 스크럼 회의 방식 도입</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Class -->
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text mb-4">Class</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white/50 p-6 rounded-lg shadow-sm">
+                                <h4 class="text-xl font-bold text-coffee-text mb-2">패스트캠퍼스 인프런 CLASS101</h4>
+                                <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-1">
+                                    <li>기초 지식 및 기술 부족함을 느끼고 온라인 강의로 학습</li>
+                                    <li>웹, SQL, DB, JAVA 기초 지식 및 GCP 무중단 배포 학습 및 스트레스 부하 테스트 학습</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/50 p-6 rounded-lg shadow-sm">
+                                <h4 class="text-xl font-bold text-coffee-text mb-2">원티드&인프런 네트워킹 밋업</h4>
+                                <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed space-y-1">
+                                    <li>2023.2.18 코틀린 & 스프링 컨퍼런스 참여</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Open PR -->
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text mb-4">Open PR</h3>
+                        <div class="bg-white/50 p-6 rounded-lg shadow-sm">
+                            <p class="text-coffee-text/90 leading-relaxed">
+                                책 &lt;스프링부트 3 백엔드 개발자 되기&gt; <a href="https://github.com/shinsunyoung/springboot-developer/issues/44" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Issue #44 shinsunyoung/springboot-developer</a> JPA DB 날짜 null로 들어가는 문제 발견 후 해결법 제시
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-24 md:py-32 bg-coffee-accent-light/30">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-center text-5xl font-bold text-coffee-text tracking-tighter mb-16 fade-in">
+                    Education
+                </h2>
+                <div class="space-y-12">
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text">한국방송통신대학교</h3>
+                        <p class="text-lg text-coffee-accent-dark mb-2">컴퓨터과학과 졸업</p>
+                        <p class="text-coffee-text/90">학사 학위 취득</p>
+                    </div>
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-semibold text-coffee-text">그린컴퓨터 아카데미</h3>
+                        <p class="text-lg text-coffee-accent-dark mb-2">자바 웹 백엔드 개발자 과정 수료</p>
+                        <ul class="list-disc list-inside text-coffee-text/90 leading-relaxed">
+                            <li>Java, OOP, Spring Framework, Web development 학습</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 md:py-40">
+            <div class="max-w-3xl mx-auto px-6 text-center">
+                <h2 class="text-6xl md:text-8xl font-bold text-coffee-text tracking-tighter leading-tight fade-in">
+                    Get in Touch
+                </h2>
+                <p class="mt-6 text-xl md:text-2xl text-coffee-text/90 max-w-xl mx-auto fade-in" style="transition-delay: 0.1s;">
+                    새로운 기회나 프로젝트에 대해 이야기할 준비가 되어 있습니다. 편하게 연락주세요.
+                </p>
+                <a href="mailto:hajune67@gmail.com" class="mt-10 text-3xl md:text-5xl font-medium text-coffee-accent-dark hover:text-coffee-text tracking-tighter transition-colors duration-300 inline-block fade-in" style="transition-delay: 0.2s;">
+                    hajune67@gmail.com
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-coffee-bg">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="text-coffee-text/70">&copy; 2025 최하준. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="https://github.com/blackjune67" target="_blank" rel="noopener noreferrer" class="text-coffee-text/70 hover:text-coffee-text">Github</a>
+                <a href="https://jjunii486.tistory.com/" target="_blank" rel="noopener noreferrer" class="text-coffee-text/70 hover:text-coffee-text">Blog</a>
+                <a href="mailto:hajune67@gmail.com" class="text-coffee-text/70 hover:text-coffee-text">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript Logic -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
