@@ -1,0 +1,177 @@
+/* Import Pixel Font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* 한글 픽셀 폰트 (선택 사항) */
+/* @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap'); */
+
+body {
+  /* 'Press Start 2P'는 한글을 지원하지 않습니다. */
+  /* 한글은 system-ui (기본 폰트)로 표시됩니다. */
+  font-family: 'Press Start 2P', system-ui, -apple-system, BlinkMacSystemFont, 'sans-serif';
+  background-color: #0D0D0D; /* 'pixel-bg' */
+  color: #E0E0E0; /* 'pixel-text' */
+  
+  /* 텍스트가 선명하게 보이도록 설정 (안티 앨리어싱 비활성화) */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* 픽셀 아트 렌더링을 위한 설정 */
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+
+  /* 네온 텍스트에 글로우 효과 */
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* 한글이 포함된 긴 문단은 기본 폰트로 보이도록 설정 (선택 사항) */
+/* p, li, .korean-text {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'sans-serif';
+  font-family: 'DotGothic16', sans-serif; 
+} */
+
+/* Scanlines Overlay */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 1px,
+    rgba(0, 0, 0, 0.2) 2px,
+    rgba(0, 0, 0, 0.2) 3px
+  );
+  z-index: 1000;
+  pointer-events: none; /* 오버레이가 클릭을 방해하지 않도록 함 */
+  opacity: 0.5;
+}
+
+
+/* Lenis smooth scroll setup */
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Fixed 3D canvas background */
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.4; /* Opacity 조정 */
+}
+
+/* Fade-in-on-scroll animation (변경 없음) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1), transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 0.1s;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- New Pixel Styles --- */
+
+/* Navigation */
+.pixel-nav {
+  background-color: rgba(13, 13, 13, 0.8); /* 'pixel-bg' with alpha */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-bottom: 2px solid #00FF00; /* 'pixel-neon' */
+}
+.nav-link {
+  @apply text-pixel-text text-sm uppercase transition-colors duration-300;
+}
+.nav-link:hover {
+  @apply text-pixel-neon;
+  text-shadow: 0 0 8px #00FF00;
+}
+
+/* Buttons */
+.pixel-button {
+  @apply inline-block px-6 py-3 bg-pixel-neon text-pixel-bg font-bold tracking-wider uppercase transition-all duration-300;
+  border: none;
+  box-shadow: 4px 4px 0px #008000; /* 'pixel-dark-green' */
+}
+.pixel-button:hover {
+  @apply bg-white;
+  box-shadow: 4px 4px 0px #00FF00;
+}
+.pixel-button-secondary {
+  @apply inline-block px-6 py-3 bg-transparent text-pixel-neon font-bold tracking-wider uppercase transition-all duration-300;
+  border: 2px solid #00FF00;
+  box-shadow: 4px 4px 0px #008000;
+}
+.pixel-button-secondary:hover {
+  @apply bg-pixel-neon/20;
+  box-shadow: 4px 4px 0px #00FF00;
+}
+
+/* Section Title */
+.section-title {
+  @apply text-center text-4xl md:text-5xl font-bold text-pixel-neon tracking-tighter mb-16;
+}
+.section-bg {
+  background-color: rgba(0, 255, 0, 0.03); /* 은은한 네온 배경 */
+}
+
+/* Skill Tags */
+.skill-title {
+  @apply text-2xl font-semibold text-pixel-neon mb-4;
+}
+.skill-pixel {
+  @apply inline-block px-4 py-2 bg-pixel-neon/10 text-pixel-neon border border-pixel-neon/50 text-sm;
+}
+
+/* Project Card */
+.project-card-pixel {
+  @apply bg-pixel-bg/30 border-2 border-pixel-neon/50 p-6 transition-all duration-300;
+}
+.project-card-pixel:hover {
+  border-color: #00FF00;
+  background-color: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+/* Tech Tag (on card) */
+.tech-pixel {
+  @apply inline-block px-3 py-1 bg-pixel-dark-green text-pixel-neon/80 text-xs font-medium;
+}
+
+/* Career Timeline */
+.timeline-pixel {
+  /* The border is applied in tailwind classes */
+}
+.timeline-item-pixel {
+  @apply relative mb-12 pl-6;
+}
+/* 타임라인 '픽셀' 마커 (정사각형) */
+.timeline-item-pixel::before {
+  content: '';
+  position: absolute;
+  left: -9px; /* (16px / 2) - 1px border -> 8px + 1px */
+  top: 8px;
+  width: 16px;
+  height: 16px;
+  background-color: #0D0D0D; /* 'pixel-bg' */
+  border: 2px solid #00FF00; /* 'pixel-neon' */
+  z-index: 1;
+}
