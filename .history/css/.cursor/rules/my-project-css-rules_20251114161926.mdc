@@ -1,0 +1,193 @@
+---
+description: JavaScript 코딩 컨벤션 및 ES6+ 모범 사례
+globs:
+  - "**/*.js"
+alwaysApply: true
+---
+
+# JavaScript 코딩 컨벤션
+
+## 명명 규칙
+
+### 변수와 함수
+```javascript
+// ✅ Good - camelCase
+const userName = 'June';
+const particleCount = 5000;
+
+function initThreeScene() {}
+function handleScrollAnimation() {}
+```
+
+### 상수
+```javascript
+// ✅ Good - UPPER_SNAKE_CASE
+const MAX_PARTICLES = 5000;
+const MOBILE_BREAKPOINT = 768;
+const ANIMATION_DURATION = 0.7;
+```
+
+### 클래스
+```javascript
+// ✅ Good - PascalCase
+class ThreeScene {}
+class ParticleSystem {}
+class ScrollAnimator {}
+```
+
+### 파일명
+```javascript
+// ✅ Good - kebab-case
+three-scene.js
+scroll-animation.js
+particle-system.js
+```
+
+## 모듈 패턴
+
+### ES6 Modules 필수
+```javascript
+// three-scene.js
+export class ThreeScene {
+  constructor(container) {
+    this.container = container;
+    this.scene = null;
+    this.camera = null;
+    this.renderer = null;
+  }
+  
+  init() {
+    // 초기화 로직
+  }
+  
+  dispose() {
+    // 메모리 정리
+  }
+}
+
+// main.js
+import { ThreeScene } from './three-scene.js';
+
+const scene = new ThreeScene(canvas);
+scene.init();
+```
+
+## 주석 작성
+
+### 모든 주석은 한국어로 작성
+```javascript
+/**
+ * Three.js 씬을 초기화합니다
+ * @param {HTMLElement} container - 캔버스를 추가할 컨테이너 요소
+ * @returns {Object} 초기화된 씬 객체
+ */
+function initScene(container) {
+  // 씬 생성
+  const scene = new THREE.Scene();
+  
+  // 카메라 설정
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  
+  return { scene, camera };
+}
+```
+
+## 비동기 처리
+
+### async/await 사용
+```javascript
+// ✅ Good
+async function loadTexture(path) {
+  try {
+    const texture = await textureLoader.loadAsync(path);
+    return texture;
+  } catch (error) {
+    console.error('텍스처 로딩 실패:', error);
+    return null;
+  }
+}
+
+// ❌ Bad - Promise 체이닝
+function loadTexture(path) {
+  return textureLoader.load(path)
+    .then(texture => texture)
+    .catch(error => console.error(error));
+}
+```
+
+## 성능 최적화
+
+### Event Listener - Debounce/Throttle 사용
+```javascript
+// utils.js에서 가져오기
+import { debounce } from './utils.js';
+
+window.addEventListener('resize', debounce(() => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}, 250));
+```
+
+### requestAnimationFrame 사용
+```javascript
+function animate() {
+  requestAnimationFrame(animate);
+  
+  // 애니메이션 로직
+  particles.rotation.x += 0.001;
+  particles.rotation.y += 0.002;
+  
+  renderer.render(scene, camera);
+}
+```
+
+### 메모리 관리 - dispose() 구현
+```javascript
+class ThreeScene {
+  dispose() {
+    // Geometry 정리
+    if (this.geometry) {
+      this.geometry.dispose();
+    }
+    
+    // Material 정리
+    if (this.material) {
+      this.material.dispose();
+    }
+    
+    // Renderer 정리
+    if (this.renderer) {
+      this.renderer.dispose();
+    }
+    
+    // Event Listener 제거
+    window.removeEventListener('resize', this.handleResize);
+  }
+}
+```
+
+## 모바일 대응
+
+### matchMedia로 반응형 처리
+```javascript
+const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+
+// 모바일에서는 파티클 수 감소
+const particleCount = isMobile() ? 1000 : 5000;
+
+// 리사이즈 시 재확인
+window.addEventListener('resize', () => {
+  if (isMobile()) {
+    // 모바일 최적화 적용
+  }
+});
+```
+
+## 금지 사항
+- ❌ `var` 키워드 사용 금지 (const, let만 사용)
+- ❌ jQuery 사용 금지
+- ❌ 프레임워크 (React, Vue) 사용 금지
+- ❌ 전역 변수 남발 금지
+- ❌ inline style 사용 최소화
+- ❌ console.log는 개발 중에만, 배포 전 제거

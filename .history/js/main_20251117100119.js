@@ -1,3 +1,6 @@
+import * as THREE from 'three';
+import Lenis from 'https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js';
+
 // Global variables for 3D objects
 let scene, camera, renderer, knot, pointLight;
 
@@ -15,29 +18,25 @@ function initThree() {
     
     // The 3D Model (a TorusKnot)
     const geometry = new THREE.TorusKnotGeometry(9, 2.5, 150, 20);
-    
-    // *** THEME CHANGE: Set material to neon green wireframe ***
     const material = new THREE.MeshStandardMaterial({ 
-        color: 0x00ff00, // 'pixel-neon'
-        wireframe: true  // Enable wireframe
+        color: 0xa38a74, // 'coffee-accent-dark'
+        wireframe: true 
     });
     knot = new THREE.Mesh(geometry, material);
     scene.add(knot);
 
     // Lighting
-    pointLight = new THREE.PointLight(0xffffff, 1.5); // White light
+    pointLight = new THREE.PointLight(0xffffff, 1.5);
     pointLight.position.set(20, 20, 20);
     scene.add(pointLight);
     
-    // *** THEME CHANGE: Dim ambient light for dark mode ***
-    const ambientLight = new THREE.AmbientLight(0x404040, 0.5); // Dim grey light
+    const ambientLight = new THREE.AmbientLight(0xfdfbf7, 0.5); // 'coffee-bg'
     scene.add(ambientLight);
 
     camera.position.z = 30;
 }
 
 // --- 2. Lenis Smooth Scroll Setup ---
-// Note: Assumes Lenis is loaded via CDN and attached to the window object.
 const lenis = new Lenis();
 
 function raf(time) {
@@ -46,9 +45,17 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
+// Smooth scroll for navigation links
+document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        lenis.scrollTo(targetId, { offset: -80 }); // Adjust offset for fixed header
+    });
+});
 
 // --- 3. Animation & Scroll Effects ---
-// 'parallax-bg'는 더 이상 사용되지 않음.
+const parallaxElements = document.querySelectorAll('.parallax-bg'); // 현재 사용되지 않지만, 나중에 추가될 수 있으므로 유지
 const fadeInElements = document.querySelectorAll('.fade-in');
 
 // Function to handle fade-in logic
@@ -59,8 +66,7 @@ function handleFadeIn() {
         if (boxTop < triggerBottom) {
             el.classList.add('is-visible');
         } else {
-            // Optional: remove to make it fade-in only once
-            // el.classList.remove('is-visible'); 
+            el.classList.remove('is-visible'); // 스크롤 올릴 때 다시 사라지도록 (선택 사항)
         }
     });
 }
@@ -74,6 +80,15 @@ lenis.on('scroll', (e) => {
         knot.rotation.x = scrollY * 0.0003;
         knot.rotation.y = scrollY * 0.0003;
     }
+
+    // Parallax effect on images
+    // 현재 .parallax-bg 요소가 없으므로 이 부분은 작동하지 않지만, 추후 추가될 경우를 대비해 유지
+    parallaxElements.forEach(el => {
+        const rect = el.parentElement.getBoundingClientRect();
+        const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        const y = (progress - 0.5) * -40; 
+        el.style.transform = `translateY(${y}%)`;
+    });
     
     // Fade-in elements
     handleFadeIn();

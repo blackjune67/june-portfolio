@@ -1,0 +1,77 @@
+---
+description: 포트폴리오 프로젝트의 전체 개요, 기술 스택, 파일 구조
+alwaysApply: true
+---
+
+# 포트폴리오 프로젝트 개요
+
+## 프로젝트 정보
+- **목적**: Java 백엔드 개발자 (5년 경력) 포트폴리오 웹사이트
+- **특징**: Three.js 3D 인터랙션, 부드러운 스크롤 경험
+- **타겟**: 채용 담당자, 기술 면접관
+
+## 기술 스택
+- HTML5 (시맨틱 태그)
+- Tailwind CSS v3.4.0 (CDN)
+- Three.js v0.160.0 (3D 그래픽)
+- Lenis v1.0.42 (스무스 스크롤)
+- Vanilla JavaScript (ES6+)
+- GitHub Pages (배포)
+
+## CDN 링크
+```html<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script><!-- Three.js (ES Module) -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script><!-- Lenis Smooth Scroll -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+```
+
+## 디렉토리 구조
+```
+portfolio/ (GitHub Pages)
+├── .cursor/
+│   └── rules/           # Cursor 규칙 파일들
+├── index.html           # 메인 HTML (GitHub Pages 진입점)
+├── css/
+│   └── style.css        # 커스텀 스타일
+├── js/
+│   └── main.js          # 모든 JavaScript 로직
+│       ├── Three.js 3D 씬 설정
+│       ├── Lenis 스무스 스크롤
+│       ├── 페이드인 애니메이션
+│       └── 리사이즈 핸들러
+├── .git/                # Git 저장소
+├── .gitignore           # (선택) Git 무시 파일
+└── README.md            # (선택) 프로젝트 문서
+```
+
+## 핵심 섹션
+1. **Header**: 고정 네비게이션 바 (glass-nav 효과)
+2. **Hero**: 3D 배경 (Three.js TorusKnot), 이름 + 소제목 + 설명 + GitHub/Blog 버튼
+3. **Skills**: Backend, Cloud & DevOps, Frontend & AI/ML 기술 스택 (pill 형태)
+4. **Projects**: 4개 프로젝트 카드 (hover 효과, 기술 태그)
+   - 티켓 스케줄 조회 최적화
+   - 동시 결제 처리량 개선
+   - 실시간 영상 분석 시스템 (POC)
+   - AWS 서버리스 영상 분석
+5. **Career**: 타임라인 형태 경력 기술 (3개 회사)
+6. **Contact**: 이메일 + Social 링크 + Footer
+
+## 주요 CSS 클래스
+- `.glass-nav`: 네비게이션 글래스모피즘 효과
+- `.fade-in`: 스크롤 페이드인 애니메이션
+- `.skill-pill`: 기술 스택 알약 스타일
+- `.project-card`: 프로젝트 카드 (호버 시 위로 올라감)
+- `.tech-pill`: 프로젝트 기술 태그
+- `.timeline-item`: 경력 타임라인 항목
+
+## 성능 최적화
+- Three.js: TorusKnot 기하학 (순환 회전)
+- Lenis: smooth scroll 라이브러리
+- Tailwind CDN: 정적 CSS 로드
+- 이미지: placehold.co placeholder 사용

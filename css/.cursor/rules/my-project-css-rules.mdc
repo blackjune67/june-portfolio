@@ -1,0 +1,262 @@
+---
+description: Tailwind CSS 스타일링 가이드 및 디자인 시스템
+globs:
+  - "**/*.html"
+  - "**/*.css"
+---
+
+# Tailwind CSS 스타일링 가이드
+
+## 컬러 시스템
+
+### Primary Colors (네온 블루)
+```html
+<!-- 텍스트 -->
+<h1 class="text-cyan-400">Title</h1>
+
+<!-- 배경 -->
+<div class="bg-cyan-500">Button</div>
+
+<!-- 테두리 -->
+<div class="border border-cyan-500">Card</div>
+
+<!-- 그림자 -->
+<div class="shadow-xl shadow-cyan-500/20">Card</div>
+```
+
+### Background Colors
+```html
+<!-- 메인 배경 -->
+<body class="bg-gray-950">
+
+<!-- 섹션 배경 -->
+<section class="bg-gray-900">
+
+<!-- 카드 배경 (글래스모피즘) -->
+<div class="bg-gray-900/50 backdrop-blur-sm">
+```
+
+## 타이포그래피
+
+### 폰트 크기
+```html
+<!-- Hero Title -->
+<h1 class="text-5xl md:text-7xl font-bold">Your Name</h1>
+
+<!-- Section Title -->
+<h2 class="text-3xl md:text-4xl font-semibold">About Me</h2>
+
+<!-- Body Text -->
+<p class="text-base md:text-lg">Description...</p>
+
+<!-- Caption -->
+<span class="text-sm text-gray-400">2020 - 2025</span>
+```
+
+### 폰트 굵기
+```html
+<h1 class="font-bold">제목</h1>        <!-- 700 -->
+<h2 class="font-semibold">소제목</h2>   <!-- 600 -->
+<p class="font-normal">본문</p>         <!-- 400 -->
+<span class="font-light">캡션</span>    <!-- 300 -->
+```
+
+## 간격 시스템
+
+### Padding
+```html
+<div class="p-4">1rem (16px)</div>
+<div class="p-6">1.5rem (24px)</div>
+<div class="p-8">2rem (32px)</div>
+<div class="p-12">3rem (48px)</div>
+```
+
+### Margin
+```html
+<section class="py-24">섹션 간격</section>
+<div class="mb-8">요소 간격</div>
+```
+
+## 컴포넌트 스타일
+
+### 버튼
+```html
+<!-- Primary Button -->
+<button class="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/50">
+  Click Me
+</button>
+
+<!-- Ghost Button -->
+<button class="px-6 py-3 border-2 border-cyan-500 text-cyan-500 hover:bg-cyan-500/10 font-semibold rounded-lg transition-all duration-300">
+  Learn More
+</button>
+```
+
+### 카드
+```html
+<div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-6 hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300 hover:-translate-y-2">
+  <!-- Card Content -->
+</div>
+```
+
+### 입력 필드
+```html
+<input 
+  type="text" 
+  class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-colors"
+  placeholder="your@email.com"
+>
+```
+
+## 애니메이션
+
+### Transition
+```html
+<!-- Fast -->
+<div class="transition-all duration-150">Fast transition</div>
+
+<!-- Normal -->
+<div class="transition-all duration-300">Normal transition</div>
+
+<!-- Slow -->
+<div class="transition-all duration-700">Slow transition</div>
+```
+
+### Hover 효과
+```html
+<!-- Scale -->
+<div class="hover:scale-105 transition-transform">Hover me</div>
+
+<!-- Shadow -->
+<div class="hover:shadow-xl hover:shadow-cyan-500/30 transition-shadow">Hover me</div>
+
+<!-- Translate -->
+<div class="hover:-translate-y-2 transition-transform">Hover me</div>
+```
+
+### 스크롤 애니메이션
+```html
+<!-- Fade In Up -->
+<div class="opacity-0 translate-y-12 transition-all duration-700 data-[visible=true]:opacity-100 data-[visible=true]:translate-y-0">
+  Content
+</div>
+```
+
+## 반응형 디자인
+
+### Breakpoints
+```html
+<!-- 모바일 우선 -->
+<div class="text-base md:text-lg lg:text-xl">
+  Responsive text
+</div>
+
+<!-- Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- Cards -->
+</div>
+
+<!-- 숨김/표시 -->
+<div class="block md:hidden">모바일만 보임</div>
+<div class="hidden md:block">데스크톱만 보임</div>
+```
+
+## 글래스모피즘 효과
+```html
+<div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6">
+  <!-- 유리 같은 효과 -->
+</div>
+```
+
+## 다크 모드 (기본)
+```html
+<!-- 배경 -->
+<body class="bg-gray-950 text-white">
+
+<!-- 섹션 -->
+<section class="bg-gray-900">
+
+<!-- 카드 -->
+<div class="bg-gray-800/50">
+```
+
+## 필수 클래스 조합
+```html
+<!-- Section Container -->
+<section class="py-24 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
+
+<!-- Card -->
+<div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-6 hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300">
+
+<!-- Button -->
+<button class="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105">
+```
+```
+
+---
+
+## **프롬프트에서 사용하는 방법**
+
+### **1. 전체 규칙 참조**
+```
+@.cursor/rules/
+
+위 모든 규칙을 따라서 index.html의 Hero 섹션을 만들어줘.
+```
+
+### **2. 특정 규칙만 참조**
+```
+@.cursor/rules/javascript-conventions.mdc @.cursor/rules/threejs-implementation.mdc
+
+위 규칙을 따라서 js/three-scene.js 파일을 작성해줘.
+```
+
+### **3. Plan 모드에서 사용**
+```
+Shift + Tab (Plan 모드 실행)
+
+@.cursor/rules/project-overview.mdc
+
+이 규칙에 따라 포트폴리오 웹사이트 전체 구현 계획을 세워줘.
+```
+
+---
+
+## **실전 프롬프트 예시**
+
+### **초기 프로젝트 생성**
+```
+@.cursor/rules/project-overview.mdc @.cursor/rules/html-structure.mdc
+
+위 규칙을 따라서 index.html 파일을 생성해줘.
+
+포함할 내용:
+- SEO 최적화된 meta 태그
+- Tailwind CSS, Three.js, Lenis CDN
+- Hero, About, Skills, Projects, Contact 섹션
+- 시맨틱 HTML5 구조
+```
+
+### **Three.js 구현**
+```
+@.cursor/rules/javascript-conventions.mdc @.cursor/rules/threejs-implementation.mdc
+
+위 규칙에 따라 js/three-scene.js를 작성해줘.
+
+요구사항:
+- ThreeScene 클래스로 구현
+- 네온 블루 파티클 시스템
+- 마우스 인터랙션 (데스크톱만)
+- 모바일 최적화 (1000개 파티클)
+```
+
+### **스타일링**
+```
+@.cursor/rules/tailwind-styling.mdc
+
+위 디자인 시스템을 따라서 Projects 섹션을 스타일링해줘.
+
+요구사항:
+- 그리드 레이아웃 (모바일 1열, 태블릿 2열, 데스크톱 3열)
+- 글래스모피즘 카드 효과
+- 호버 시 scale + shadow 애니메이션
